@@ -23,10 +23,15 @@ public class PropertyCriteriaRepository {
         CriteriaQuery<Property> criteriaQuery = criteriaBuilder.createQuery(Property.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<Property> root = criteriaQuery.from(Property.class);
+        if (propertyCriteriaRequest.title() != null){
+            Predicate titlePredicate = criteriaBuilder.like(root.get("title"),"%" + propertyCriteriaRequest.title() + "%");
+            predicates.add(titlePredicate);
+        }
         if (propertyCriteriaRequest.description() != null){
             Predicate descriptionPredicate = criteriaBuilder.like(root.get("description"),"%" + propertyCriteriaRequest.description() + "%");
             predicates.add(descriptionPredicate);
         }
+
         if (propertyCriteriaRequest.minPrice() != null) {
             Predicate minPricePredicate = criteriaBuilder.greaterThanOrEqualTo(root.get("price"), propertyCriteriaRequest.minPrice());
             predicates.add(minPricePredicate);

@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -22,24 +23,21 @@ public class SecurityConfiguration {
         httpSecurity
                 .csrf()
                 .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/login").permitAll()
-                .requestMatchers("/api/v1/auth/register").permitAll()
-                .requestMatchers("/api/v1/auth/test/**").permitAll()
-                .requestMatchers(HttpMethod.POST,"/api/v1/auth/properties")
-                .hasRole("OWNER")
-                .anyRequest()
-                .authenticated()
-                .and()
+                .authorizeHttpRequests(auth ->{
+                    auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/v1/auth/test/**")).permitAll();
+                    auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST,"/api/v1/properties")).hasAuthority("OWNER");
+                    auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE,"/api/v1/properties/{id}")).hasAuthority("OWNER");
+                    auth.requestMatchers("/api/v1/auth/**").permitAll();
+                    auth.anyRequest().authenticated();
+                })
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
-                .logoutUrl("/api/v1/auth/logout")
-        ;
+                .logoutUrl("/api/v1/auth/logout");
 
-    return httpSecurity.build();
+        return httpSecurity.build();
     }
 }

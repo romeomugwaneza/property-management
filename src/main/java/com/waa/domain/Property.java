@@ -32,7 +32,7 @@ public class Property {
     private Address address;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Offer> offers;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
 }

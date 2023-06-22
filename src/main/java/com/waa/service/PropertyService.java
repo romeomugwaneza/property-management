@@ -60,4 +60,43 @@ public class PropertyService implements IPropertyService{
     public List<Property> findAll() {
         return propertyRepository.findAll();
     }
+
+    @Override
+    public Property findById(long propertyId) {
+        return propertyRepository.findById(propertyId).orElseThrow();
+    }
+
+    @Override
+    public void delete(long propertyId) {
+        propertyRepository.deleteById(propertyId);
+    }
+
+    @Override
+    public void changeStatus(int propertyId, String status) throws IllegalArgumentException {
+        try {
+            PropertyStatus.valueOf(status);
+            var property = findById(propertyId);
+            property.setPropertyStatus(PropertyStatus.valueOf(status));
+            propertyRepository.save(property);
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException("Status not permitted.");
+        }
+    }
+
+    @Override
+    public void update(long propertyId, PropertyRequest propertyRequest) {
+        var property = findById(propertyId);
+        updateProperty(property, propertyRequest);
+        propertyRepository.save(property);
+    }
+
+    private void updateProperty(Property property, PropertyRequest propertyRequest) {
+        property.setDescription(propertyRequest.description());
+        property.setPrice(propertyRequest.price());
+        property.setNumberOfBathRooms(propertyRequest.numberOfBathRooms());
+        property.setNumberOfBedRooms(propertyRequest.numberOfBedRooms());
+        property.setTitle(propertyRequest.title());
+        if (propertyRequest.address()!=null)
+            property.setAddress(propertyRequest.address());
+    }
 }
