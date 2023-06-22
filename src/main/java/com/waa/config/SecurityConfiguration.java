@@ -27,6 +27,7 @@ public class SecurityConfiguration {
                     auth.requestMatchers(AntPathRequestMatcher.antMatcher("/api/v1/auth/test/**")).permitAll();
                     auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST,"/api/v1/properties")).hasAuthority("OWNER");
                     auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE,"/api/v1/properties/{id}")).hasAuthority("OWNER");
+                    auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT,"/api/v1/properties/{id}")).hasAuthority("OWNER");
                     auth.requestMatchers("/api/v1/auth/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
