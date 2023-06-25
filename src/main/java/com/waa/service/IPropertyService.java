@@ -1,10 +1,9 @@
 package com.waa.service;
 
+import java.util.List;
 import com.waa.domain.Property;
 import com.waa.domain.request.PropertyRequest;
-import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 
 public interface IPropertyService {
     void add(PropertyRequest propertyRequest);

@@ -1,21 +1,19 @@
 package com.waa.controller;
 
 import com.waa.auth.*;
-import com.waa.exceptions.PasswordNotMatchException;
-import com.waa.exceptions.UserNotFoundException;
+import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import com.waa.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
+import com.waa.exceptions.UserNotFoundException;
+import org.springframework.web.bind.annotation.*;
+import com.waa.exceptions.PasswordNotMatchException;
+import com.waa.exceptions.UserAlreadyExistsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.*;
-import com.waa.exceptions.UserAlreadyExistsException;
-
-import java.util.Collection;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/v1/auth")

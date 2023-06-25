@@ -1,9 +1,10 @@
 package com.waa.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
+import com.waa.domain.Role;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
 @Builder
@@ -14,6 +15,6 @@ public class RegisterRequest {
     private String lastName;
     private String email;
     private String password;
-    private String role;
     private String passwordCheck;
+    private Role role;
 }

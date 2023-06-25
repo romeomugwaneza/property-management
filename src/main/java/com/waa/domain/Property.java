@@ -2,9 +2,10 @@ package com.waa.domain;
 
 import lombok.Data;
 import lombok.Builder;
+
 import java.util.List;
-import java.time.LocalDate;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,11 +22,11 @@ public class Property {
     private String title;
     private String description;
     private double price;
-    private String numberOfBedRooms;
-    private String numberOfBathRooms;
+    private int numberOfBedRooms;
+    private int numberOfBathRooms;
     private String imageUrl;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate postedDate;
+    private LocalDateTime postedDate;
     @Enumerated(EnumType.STRING)
     private PropertyStatus propertyStatus;
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,6 +34,6 @@ public class Property {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Offer> offers;
     @ManyToOne
-    private User user;
+    private User owner;
 
 }

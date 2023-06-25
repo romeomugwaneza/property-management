@@ -1,18 +1,18 @@
 package com.waa.repository;
 
-import com.waa.domain.Property;
-import com.waa.domain.request.PropertyCriteriaRequest;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import com.waa.domain.Property;
+import jakarta.persistence.TypedQuery;
+import lombok.RequiredArgsConstructor;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Predicate;
+import org.springframework.stereotype.Repository;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import com.waa.domain.request.PropertyCriteriaRequest;
+
 
 @Repository
 @RequiredArgsConstructor

@@ -55,7 +55,7 @@ public class AuthenticationService implements IAuthenticationService{
         if (userRepository
                 .findByEmail(registerRequest.getEmail())
                 .isPresent()) throw new UserAlreadyExistsException("User with email: " + registerRequest.getEmail() + " already exists.");
-        var role = Role.valueOf(registerRequest.getRole().toUpperCase());
+        var role = Role.valueOf(registerRequest.getRole().toString());
         var user = User.builder()
                 .firstName(registerRequest.getFirstName())
                 .lastName(registerRequest.getLastName())

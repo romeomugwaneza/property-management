@@ -1,6 +1,8 @@
 package com.waa.service;
 
+import java.util.List;
 import com.waa.domain.Address;
+import java.time.LocalDateTime;
 import com.waa.domain.Property;
 import com.waa.domain.PropertyStatus;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -47,9 +46,9 @@ public class PropertyService implements IPropertyService{
                 .numberOfBedRooms(propertyRequest.numberOfBedRooms())
                 .numberOfBathRooms(propertyRequest.numberOfBathRooms())
                 .imageUrl(propertyRequest.imageUrl())
-                .postedDate(LocalDate.now())
+                .postedDate(LocalDateTime.now())
                 .propertyStatus(PropertyStatus.valueOf(propertyRequest.propertyStatus()))
-                .user(userFromDb)
+                .owner(userFromDb)
                 .address(address)
                 .build();
 

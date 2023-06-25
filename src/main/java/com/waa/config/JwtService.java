@@ -1,18 +1,17 @@
 package com.waa.config;
-import io.jsonwebtoken.Claims;
+
+import java.util.Date;
+import java.util.Map;
+import java.security.Key;
+import java.util.HashMap;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.Claims;
+import java.util.function.Function;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
-
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Service
 public class JwtService {
